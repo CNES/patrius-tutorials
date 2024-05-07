@@ -1,4 +1,4 @@
-# PATRIUS tutorials
+# PATRIUS Tutorials
 
 This project contains a list of tutorials to learn how to use the PATRIUS library. These tutorials are compatible with **Patrius v4.8.1**, currently the latest version available on the [Maven Central repositories](https://mvnrepository.com/artifact/fr.cnes.sirius.patrius/patrius).
 
@@ -20,7 +20,7 @@ All the main domains of space dynamics are available:
 
 PATRIUS has its own Wiki accessible at the following address: http://patrius.cnes.fr
 
-### Tutorial Description
+## Tutorial Description
 
 This list of tutorials is divided in 10 themes:
 
