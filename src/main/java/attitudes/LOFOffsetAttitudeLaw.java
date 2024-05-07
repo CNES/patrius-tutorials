@@ -1,4 +1,4 @@
-package attitude;
+package attitudes;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
