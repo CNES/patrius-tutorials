@@ -4,7 +4,7 @@ This project contains a list of tutorials to learn how to use the PATRIUS librar
 
 ## ABOUT
 
-PATRIUS is a core space dynamics Java library developed by thethe [CNES](http://cnes.fr), the French Space Agency, that enables developers to quickly develop high level algorithms such as orbit extrapolator. PATRIUS contains several sub-libraries that work together and cover low level classes (i.e.: such as matrix, vectors, orbits parameters) as well as high level classes and interfaces (i.e.: numerical propagators, attitude laws, manoeuvers sequences). 
+PATRIUS is a core space dynamics Java library developed by the [CNES](http://cnes.fr), the French Space Agency, that enables developers to quickly develop high level algorithms such as orbit extrapolator. PATRIUS contains several sub-libraries that work together and cover low level classes (i.e.: such as matrix, vectors, orbits parameters) as well as high level classes and interfaces (i.e.: numerical propagators, attitude laws, manoeuvers sequences). 
 
 All the main domains of space dynamics are available: 
 
