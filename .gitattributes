@@ -1,0 +1,9 @@
+* text=auto
+*.{cmd,[cC][mM][dD]} text eol=crlf
+*.{bat,[bB][aA][tT]} text eol=crlf
+*.{ps1,[pP][sS][1]} text eol=crlf
+*.{psm1,[pP][sS][mM][1]} text eol=crlf
+*.{psd1,[pP][sS][dD][1]} text eol=crlf
+*.{ps1xml,[pP][sS][1][xX][mM][lL]} text eol=crlf
+*.sh text eol=lf
+.githooks/** text eol=lf
