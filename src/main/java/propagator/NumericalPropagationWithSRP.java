@@ -15,13 +15,14 @@ import fr.cnes.sirius.patrius.assembly.properties.RadiativeIRProperty;
 import fr.cnes.sirius.patrius.assembly.properties.RadiativeProperty;
 import fr.cnes.sirius.patrius.assembly.properties.RadiativeSphereProperty;
 import fr.cnes.sirius.patrius.bodies.CelestialBody;
-import fr.cnes.sirius.patrius.bodies.ExtendedOneAxisEllipsoid;
-import fr.cnes.sirius.patrius.bodies.GeometricBodyShape;
+import fr.cnes.sirius.patrius.bodies.EllipsoidBodyShape;
+import fr.cnes.sirius.patrius.bodies.OneAxisEllipsoid;
 import fr.cnes.sirius.patrius.bodies.MeeusSun;
 import fr.cnes.sirius.patrius.forces.radiation.IEmissivityModel;
 import fr.cnes.sirius.patrius.forces.radiation.KnockeRiesModel;
 import fr.cnes.sirius.patrius.forces.radiation.RediffusedRadiationPressure;
-import fr.cnes.sirius.patrius.forces.radiation.SolarRadiationPressureEllipsoid;
+import fr.cnes.sirius.patrius.forces.gravity.GravityModel;
+import fr.cnes.sirius.patrius.forces.gravity.ThirdBodyAttraction;
 import fr.cnes.sirius.patrius.frames.Frame;
 import fr.cnes.sirius.patrius.frames.FramesFactory;
 import fr.cnes.sirius.patrius.math.ode.FirstOrderIntegrator;
@@ -100,13 +101,14 @@ public class NumericalPropagationWithSRP {
         // Definition of the Earth ellipsoid for later SRP computation
         final Frame ITRF = FramesFactory.getITRF();
         final double AE = Constants.WGS84_EARTH_EQUATORIAL_RADIUS;
-        final GeometricBodyShape EARTH = new ExtendedOneAxisEllipsoid(AE, Constants.WGS84_EARTH_FLATTENING, ITRF, "EARTH");
+        final EllipsoidBodyShape EARTH = new OneAxisEllipsoid(AE, Constants.WGS84_EARTH_FLATTENING, ITRF, "EARTH");
  
         // Direct SRP data
         final double dRef = 1.4959787E11;
         final double pRef = 4.5605E-6;
         final DirectRadiativeModel rm = new DirectRadiativeModel(assembly);
-        final SolarRadiationPressureEllipsoid radPres = new SolarRadiationPressureEllipsoid(dRef, pRef, sun, EARTH, rm);
+        final GravityModel radPres = new MeeusSun().getGravityModel();
+        final ThirdBodyAttraction sunForceModel = new ThirdBodyAttraction(radPres);
  
         // Rediffused DRP data
         final int inCorona = 1;
@@ -130,18 +132,16 @@ public class NumericalPropagationWithSRP {
         final FirstOrderIntegrator integrator = new ClassicalRungeKuttaIntegrator(pasRk);
  
         // Initialization of the propagator
-        final NumericalPropagator propagator = new NumericalPropagator(integrator);
+        final NumericalPropagator propagator = new NumericalPropagator(integrator, iniState.getFrame(), 
+        		OrbitType.CARTESIAN, PositionAngle.TRUE);
         propagator.resetInitialState(iniState);
  
         // Adding additional state (change name add to set for V3.3)
         propagator.setMassProviderEquation(mm);
  
-        // Forcing integration using cartesian equations
-        propagator.setOrbitType(OrbitType.CARTESIAN);
- 
         //SPECIFIC
         // Adding SRP forces
-        propagator.addForceModel(radPres);        
+        propagator.addForceModel(sunForceModel);        
         propagator.addForceModel(reDiff);        
         //SPECIFIC
  

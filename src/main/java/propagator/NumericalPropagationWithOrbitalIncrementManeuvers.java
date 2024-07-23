@@ -103,11 +103,9 @@ public class NumericalPropagationWithOrbitalIncrementManeuvers {
         final FirstOrderIntegrator integrator = new ClassicalRungeKuttaIntegrator(pasRk);
  
         // Initialization of the propagator
-        final NumericalPropagator propagator = new NumericalPropagator(integrator);
+        final NumericalPropagator propagator = new NumericalPropagator(integrator, iniState.getFrame(), 
+        		OrbitType.CARTESIAN, PositionAngle.TRUE);
         propagator.resetInitialState(iniState);
- 
-        // Forcing integration using cartesian equations
-        propagator.setOrbitType(OrbitType.CARTESIAN);
  
         final ArrayList<DateDetector> listOfEvents = new ArrayList<DateDetector>();
         final ArrayList<ImpulseManeuver> listOfMan = new ArrayList<ImpulseManeuver>();

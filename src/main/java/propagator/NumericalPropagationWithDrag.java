@@ -11,8 +11,8 @@ import fr.cnes.sirius.patrius.assembly.models.AeroModel;
 import fr.cnes.sirius.patrius.assembly.models.MassModel;
 import fr.cnes.sirius.patrius.assembly.properties.AeroSphereProperty;
 import fr.cnes.sirius.patrius.assembly.properties.MassProperty;
-import fr.cnes.sirius.patrius.bodies.ExtendedOneAxisEllipsoid;
-import fr.cnes.sirius.patrius.bodies.GeometricBodyShape;
+import fr.cnes.sirius.patrius.bodies.OneAxisEllipsoid;
+import fr.cnes.sirius.patrius.bodies.EllipsoidBodyShape;
 import fr.cnes.sirius.patrius.forces.ForceModel;
 import fr.cnes.sirius.patrius.forces.atmospheres.Atmosphere;
 import fr.cnes.sirius.patrius.forces.atmospheres.US76;
@@ -95,20 +95,18 @@ public class NumericalPropagationWithDrag {
         final FirstOrderIntegrator integrator = new ClassicalRungeKuttaIntegrator(pasRk);
  
         // Initialization of the propagator
-        final NumericalPropagator propagator = new NumericalPropagator(integrator);
+        final NumericalPropagator propagator = new NumericalPropagator(integrator, iniState.getFrame(), 
+        		OrbitType.CARTESIAN, PositionAngle.TRUE);
         propagator.resetInitialState(iniState);
  
         // Adding additional state (change name add to set for V3.3)
         propagator.setMassProviderEquation(mm);
  
-        // Forcing integration using cartesian equations
-        propagator.setOrbitType(OrbitType.CARTESIAN);
- 
         //SPECIFIC
         // Definition of the Earth ellipsoid for later atmospheric density computation
         final Frame ITRF = FramesFactory.getITRF();
         final double AE = Constants.WGS84_EARTH_EQUATORIAL_RADIUS;
-        final GeometricBodyShape EARTH = new ExtendedOneAxisEllipsoid(AE, Constants.WGS84_EARTH_FLATTENING, ITRF, "EARTH");
+        final EllipsoidBodyShape EARTH = new OneAxisEllipsoid(AE, Constants.WGS84_EARTH_FLATTENING, ITRF, "EARTH");
  
         // Adding atmospheric forces using US76 model
         final Atmosphere atmosphere = new US76(EARTH);
