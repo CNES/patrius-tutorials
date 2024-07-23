@@ -6,7 +6,7 @@ import java.net.URISyntaxException;
 import fr.cnes.sirius.addons.patriusdataset.PatriusDataset;
 import fr.cnes.sirius.patrius.attitudes.Attitude;
 import fr.cnes.sirius.patrius.attitudes.AttitudeLaw;
-import fr.cnes.sirius.patrius.attitudes.TwoDirectionsAttitude;
+import fr.cnes.sirius.patrius.attitudes.TwoDirectionAttitudeLaw;
 import fr.cnes.sirius.patrius.attitudes.directions.CelestialBodyPolesAxisDirection;
 import fr.cnes.sirius.patrius.attitudes.directions.ToCelestialBodyCenterDirection;
 import fr.cnes.sirius.patrius.bodies.CelestialBody;
@@ -28,7 +28,7 @@ import fr.cnes.sirius.patrius.time.TimeScalesFactory;
 import fr.cnes.sirius.patrius.utils.Constants;
 import fr.cnes.sirius.patrius.utils.exception.PatriusException;
 
-public class TwoDirectionAttitudeLaw {
+public class TwoDirectionAttitudeLaws {
 	 
     public static void main(final String[] args) throws PatriusException, IOException, URISyntaxException {
  
@@ -67,7 +67,7 @@ public class TwoDirectionAttitudeLaw {
         // Building an attitude law
         final Vector3D firstAxis = new Vector3D(1., 0., 0.);
         final Vector3D secondAxis = new Vector3D(0., 1., 0.);
-        final AttitudeLaw attitudeLaw = new TwoDirectionsAttitude(dirSun, dirPole, firstAxis, secondAxis);
+        final TwoDirectionAttitudeLaw attitudeLaw = new TwoDirectionAttitudeLaw(dirSun, dirPole, firstAxis, secondAxis);
         final Attitude att = attitudeLaw.getAttitude(iniOrbit);
  
         // Printing attitude

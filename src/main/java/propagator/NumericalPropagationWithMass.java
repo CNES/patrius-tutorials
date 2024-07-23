@@ -80,16 +80,13 @@ public class NumericalPropagationWithMass {
         final FirstOrderIntegrator integrator = new ClassicalRungeKuttaIntegrator(pasRk);
  
         // Initialization of the propagator
-        final NumericalPropagator propagator = new NumericalPropagator(integrator);
+        final NumericalPropagator propagator = new NumericalPropagator(integrator, iniState.getFrame(), 
+        		OrbitType.CARTESIAN, PositionAngle.TRUE);
         propagator.resetInitialState(iniState);
  
         //SPECIFIC
         // Adding additional state (change name add to set for V3.3)
         propagator.setMassProviderEquation(mm);
-        //SPECIFIC
- 
-        // Forcing integration using cartesian equations
-        propagator.setOrbitType(OrbitType.CARTESIAN);
  
         // Propagating 1000s
         final double dt = 1000.;

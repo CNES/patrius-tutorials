@@ -64,11 +64,9 @@ public class NumericalPropagationWithFixedStepHandler {
         final FirstOrderIntegrator integrator = new ClassicalRungeKuttaIntegrator(pasRk);
  
         // Initialization of the propagator
-        final NumericalPropagator propagator = new NumericalPropagator(integrator);
+        final NumericalPropagator propagator = new NumericalPropagator(integrator, iniState.getFrame(), 
+        		OrbitType.CARTESIAN, PositionAngle.TRUE);
         propagator.resetInitialState(iniState);
- 
-        // Forcing integration using cartesian equations
-        propagator.setOrbitType(OrbitType.CARTESIAN);
  
         //SPECIFIC
         // Creation of a fixed step handler

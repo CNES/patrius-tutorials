@@ -4,9 +4,9 @@ import java.io.IOException;
 import java.net.URISyntaxException;
 
 import fr.cnes.sirius.addons.patriusdataset.PatriusDataset;
-import fr.cnes.sirius.patrius.bodies.ExtendedOneAxisEllipsoid;
-import fr.cnes.sirius.patrius.bodies.GeodeticPoint;
-import fr.cnes.sirius.patrius.bodies.GeometricBodyShape;
+import fr.cnes.sirius.patrius.bodies.EllipsoidBodyShape;
+import fr.cnes.sirius.patrius.bodies.EllipsoidPoint;
+import fr.cnes.sirius.patrius.bodies.OneAxisEllipsoid;
 import fr.cnes.sirius.patrius.frames.Frame;
 import fr.cnes.sirius.patrius.frames.FramesFactory;
 import fr.cnes.sirius.patrius.math.ode.FirstOrderIntegrator;
@@ -65,21 +65,19 @@ public class NumericalPropagationWithStopEvent {
         final FirstOrderIntegrator integrator = new ClassicalRungeKuttaIntegrator(pasRk);
  
         // Initialization of the propagator
-        final NumericalPropagator propagator = new NumericalPropagator(integrator);
+        final NumericalPropagator propagator = new NumericalPropagator(integrator, iniState.getFrame(), 
+        		OrbitType.CARTESIAN, PositionAngle.TRUE);
         propagator.resetInitialState(iniState);
- 
-        // Forcing integration using cartesian equations
-        propagator.setOrbitType(OrbitType.CARTESIAN);
  
         //SPECIFIC
         // Definition of the Earth ellipsoid
         final Frame ITRF = FramesFactory.getITRF();
-        final double AE = Constants.WGS84_EARTH_EQUATORIAL_RADIUS;
-        final GeometricBodyShape EARTH = new ExtendedOneAxisEllipsoid(AE, Constants.WGS84_EARTH_FLATTENING, ITRF, "EARTH");
+        final EllipsoidBodyShape earthBodyShape =
+                new OneAxisEllipsoid(6378137.0, 1.0 / 298.257222101, FramesFactory.getITRF());
  
         // Adding an altitude stop event
         final double endAlt = 750.e+3;
-        final AltitudeDetector stopEvent = new AltitudeDetector(endAlt, EARTH);
+        final AltitudeDetector stopEvent = new AltitudeDetector(endAlt, earthBodyShape);
         propagator.addEventDetector(stopEvent);
         //SPECIFIC
  
@@ -90,14 +88,14 @@ public class NumericalPropagationWithStopEvent {
         final Orbit finalOrbit = finalState.getOrbit();
  
         // Get geodetic coordinates (altitude, latitude, longitude)
-        final GeodeticPoint iniGeodeticPoint = EARTH.transform(iniOrbit.getPVCoordinates().getPosition(), ITRF, date);
-        final GeodeticPoint finalGeodeticPoint = EARTH.transform(finalOrbit.getPVCoordinates().getPosition(), ITRF, date);
+        final EllipsoidPoint iniGeodeticPoint = earthBodyShape.buildPoint(iniOrbit.getPVCoordinates().getPosition(), ITRF, date, "");
+        final EllipsoidPoint finalGeodeticPoint = earthBodyShape.buildPoint(finalOrbit.getPVCoordinates().getPosition(), ITRF, date, "");
  
         System.out.println();
         iniOrbit.getPVCoordinates(ITRF);
-        System.out.println("Initial altitude = "+iniGeodeticPoint.getAltitude()/1000.+" km");
+        System.out.println("Initial altitude = "+iniGeodeticPoint.getLLHCoordinates().getHeight()/1000.+" km");
         System.out.println("New date = "+finalOrbit.getDate().toString(TUC)+" deg");
-        System.out.println("Final altitude = "+finalGeodeticPoint.getAltitude()/1000.+" km");
+        System.out.println("Final altitude = "+finalGeodeticPoint.getLLHCoordinates().getHeight()/1000.+" km");
  
     }
  

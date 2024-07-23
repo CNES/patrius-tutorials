@@ -6,8 +6,11 @@ import java.text.ParseException;
 
 import fr.cnes.sirius.addons.patriusdataset.PatriusDataset;
 import fr.cnes.sirius.patrius.forces.ForceModel;
+import fr.cnes.sirius.patrius.forces.gravity.DirectBodyAttraction;
 import fr.cnes.sirius.patrius.forces.gravity.EarthGravitationalModelFactory;
 import fr.cnes.sirius.patrius.forces.gravity.EarthGravitationalModelFactory.GravityFieldNames;
+import fr.cnes.sirius.patrius.forces.gravity.GravityModel;
+import fr.cnes.sirius.patrius.forces.gravity.ThirdBodyAttraction;
 import fr.cnes.sirius.patrius.frames.Frame;
 import fr.cnes.sirius.patrius.frames.FramesFactory;
 import fr.cnes.sirius.patrius.math.ode.FirstOrderIntegrator;
@@ -65,17 +68,15 @@ public class NumericalPropagationWithPotential {
         final FirstOrderIntegrator integrator = new ClassicalRungeKuttaIntegrator(pasRk);
  
         // Initialization of the propagator
-        final NumericalPropagator propagator = new NumericalPropagator(integrator);
+        final NumericalPropagator propagator = new NumericalPropagator(integrator, iniState.getFrame(), 
+        		OrbitType.CARTESIAN, PositionAngle.TRUE);
         propagator.resetInitialState(iniState);
- 
-        // Forcing integration using cartesian equations
-        propagator.setOrbitType(OrbitType.CARTESIAN);
  
         //SPECIFIC
         // Adding gravity field (8x8)
-        final ForceModel potentiel =  EarthGravitationalModelFactory.getDroziner(GravityFieldNames.GRGS, "grim4s4_gr", 8, 8, true);
- 
-        propagator.addForceModel(potentiel);
+        final GravityModel potentiel =  EarthGravitationalModelFactory.getDroziner(GravityFieldNames.GRGS, "grim4s4_gr", 8, 8, true);
+        final ForceModel directPotentiel = new DirectBodyAttraction(potentiel);
+        propagator.addForceModel(directPotentiel);
         //SPECIFIC
  
         // Propagating 1000s

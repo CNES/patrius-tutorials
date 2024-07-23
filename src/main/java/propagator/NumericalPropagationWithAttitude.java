@@ -65,17 +65,14 @@ public class NumericalPropagationWithAttitude {
         final FirstOrderIntegrator integrator = new ClassicalRungeKuttaIntegrator(pasRk);
  
         // Initialization of the propagator
-        final NumericalPropagator propagator = new NumericalPropagator(integrator);
+        final NumericalPropagator propagator = new NumericalPropagator(integrator, iniState.getFrame(), 
+        		OrbitType.CARTESIAN, PositionAngle.TRUE);
         propagator.resetInitialState(iniState);
- 
-        // Forcing integration using cartesian equations
-        propagator.setOrbitType(OrbitType.CARTESIAN);
  
         //SPECIFIC
         // Adding an attitude law
         final AttitudeLaw attitudeLaw = new LofOffset(LOFType.TNW, RotationOrder.ZYX, 0., 0., 0.);
         propagator.setAttitudeProvider(attitudeLaw);
-        //SPECIFIC
  
         // Propagating 100s
         final double dt = 100.;
