@@ -5,8 +5,8 @@ import java.net.URISyntaxException;
 
 import fr.cnes.sirius.addons.patriusdataset.PatriusDataset;
 import fr.cnes.sirius.patrius.propagation.SpacecraftState;
-import fr.cnes.sirius.patrius.propagation.events.AbstractDetector;
-import fr.cnes.sirius.patrius.propagation.events.EventDetector;
+import fr.cnes.sirius.patrius.events.AbstractDetector;
+import fr.cnes.sirius.patrius.events.EventDetector;
 import fr.cnes.sirius.patrius.time.AbsoluteDate;
 import fr.cnes.sirius.patrius.time.TimeScale;
 import fr.cnes.sirius.patrius.time.TimeScalesFactory;
@@ -93,5 +93,10 @@ public class EventUsingEventDetector implements EventDetector {
         System.out.println("Remove the event after occuring: " + event.shouldBeRemoved());
  
     }
+
+	@Override
+	public boolean filterEvent(SpacecraftState state, boolean increasing, boolean forward) throws PatriusException {
+		return false;
+	}
  
 }

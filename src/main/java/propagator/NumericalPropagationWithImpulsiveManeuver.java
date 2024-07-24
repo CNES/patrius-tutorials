@@ -23,8 +23,8 @@ import fr.cnes.sirius.patrius.orbits.PositionAngle;
 import fr.cnes.sirius.patrius.orbits.orbitalparameters.ApsisRadiusParameters;
 import fr.cnes.sirius.patrius.propagation.MassProvider;
 import fr.cnes.sirius.patrius.propagation.SpacecraftState;
-import fr.cnes.sirius.patrius.propagation.events.DateDetector;
-import fr.cnes.sirius.patrius.propagation.events.EventDetector;
+import fr.cnes.sirius.patrius.events.detectors.DateDetector;
+import fr.cnes.sirius.patrius.events.EventDetector;
 import fr.cnes.sirius.patrius.propagation.numerical.NumericalPropagator;
 import fr.cnes.sirius.patrius.time.AbsoluteDate;
 import fr.cnes.sirius.patrius.time.TimeScale;
@@ -50,7 +50,7 @@ public class NumericalPropagationWithImpulsiveManeuver {
         final Frame GCRF = FramesFactory.getGCRF();
  
         // Initial orbit
-        final double sma = 7200.e+3;
+        final double sma = 7000.e+3;
         final double exc = 0.01;
         final double per = sma*(1.-exc);
         final double apo = sma*(1.+exc);

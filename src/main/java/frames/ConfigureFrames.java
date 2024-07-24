@@ -10,7 +10,7 @@ import fr.cnes.sirius.patrius.frames.configuration.DiurnalRotation;
 import fr.cnes.sirius.patrius.frames.configuration.FramesConfiguration;
 import fr.cnes.sirius.patrius.frames.configuration.FramesConfigurationBuilder;
 import fr.cnes.sirius.patrius.frames.configuration.PolarMotion;
-import fr.cnes.sirius.patrius.frames.configuration.PrecessionNutation;
+import fr.cnes.sirius.patrius.frames.configuration.precessionnutation.PrecessionNutation;
 import fr.cnes.sirius.patrius.frames.configuration.eop.NoEOP2000History;
 import fr.cnes.sirius.patrius.frames.configuration.libration.LibrationCorrectionModel;
 import fr.cnes.sirius.patrius.frames.configuration.libration.LibrationCorrectionModelFactory;
@@ -115,7 +115,7 @@ public class ConfigureFrames {
         PrecessionNutation precNut = null;
         if ( isPrecNut ) {
             precNut = new PrecessionNutation(false,
-                    PrecessionNutationModelFactory.PN_IERS2010_INTERPOLATED_NON_CONSTANT);
+                    PrecessionNutationModelFactory.PN_IERS2010_INTERPOLATED_NON_CONSTANT_OLD);
         } else {
             precNut = new PrecessionNutation(false,
                     PrecessionNutationModelFactory.NO_PN);
@@ -123,7 +123,7 @@ public class ConfigureFrames {
  
         builder.setDiurnalRotation(defaultDiurnalRotation);
         builder.setPolarMotion(defaultPolarMotion);
-        builder.setPrecessionNutation(precNut);
+        builder.setCIRFPrecessionNutation(precNut);
         builder.setEOPHistory(new NoEOP2000History());
  
         return builder.getConfiguration();

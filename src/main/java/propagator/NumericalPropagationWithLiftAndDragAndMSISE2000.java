@@ -25,6 +25,7 @@ import fr.cnes.sirius.patrius.forces.atmospheres.solarActivity.ConstantSolarActi
 import fr.cnes.sirius.patrius.forces.atmospheres.solarActivity.SolarActivityDataProvider;
 import fr.cnes.sirius.patrius.forces.atmospheres.solarActivity.specialized.ClassicalMSISE2000SolarData;
 import fr.cnes.sirius.patrius.forces.drag.DragForce;
+import fr.cnes.sirius.patrius.frames.CelestialBodyFrame;
 import fr.cnes.sirius.patrius.frames.Frame;
 import fr.cnes.sirius.patrius.frames.FramesFactory;
 import fr.cnes.sirius.patrius.frames.LOFType;
@@ -126,7 +127,7 @@ public class NumericalPropagationWithLiftAndDragAndMSISE2000 {
         propagator.setAttitudeProvider(attitudeLaw);
  
         // Definition of the Earth ellipsoid for later atmospheric density computation
-        final Frame ITRF = FramesFactory.getITRF();
+        final CelestialBodyFrame ITRF = FramesFactory.getITRF();
         final double AE = Constants.WGS84_EARTH_EQUATORIAL_RADIUS;
         final EllipsoidBodyShape EARTH = new OneAxisEllipsoid(AE, Constants.WGS84_EARTH_FLATTENING, ITRF, "EARTH");
  

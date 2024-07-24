@@ -30,7 +30,7 @@ import fr.cnes.sirius.patrius.orbits.PositionAngle;
 import fr.cnes.sirius.patrius.orbits.orbitalparameters.KeplerianParameters;
 import fr.cnes.sirius.patrius.propagation.MassProvider;
 import fr.cnes.sirius.patrius.propagation.SpacecraftState;
-import fr.cnes.sirius.patrius.propagation.events.DateDetector;
+import fr.cnes.sirius.patrius.events.detectors.DateDetector;
 import fr.cnes.sirius.patrius.propagation.numerical.NumericalPropagator;
 import fr.cnes.sirius.patrius.time.AbsoluteDate;
 import fr.cnes.sirius.patrius.time.TimeScale;

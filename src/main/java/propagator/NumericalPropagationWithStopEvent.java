@@ -18,7 +18,7 @@ import fr.cnes.sirius.patrius.orbits.OrbitType;
 import fr.cnes.sirius.patrius.orbits.PositionAngle;
 import fr.cnes.sirius.patrius.orbits.orbitalparameters.ApsisRadiusParameters;
 import fr.cnes.sirius.patrius.propagation.SpacecraftState;
-import fr.cnes.sirius.patrius.propagation.events.AltitudeDetector;
+import fr.cnes.sirius.patrius.events.detectors.AltitudeDetector;
 import fr.cnes.sirius.patrius.propagation.numerical.NumericalPropagator;
 import fr.cnes.sirius.patrius.time.AbsoluteDate;
 import fr.cnes.sirius.patrius.time.TimeScale;

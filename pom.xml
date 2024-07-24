@@ -27,7 +27,7 @@
 		<dependency>
 			<groupId>fr.cnes.sirius.patrius</groupId>
 			<artifactId>patrius</artifactId>
-			<version>4.12.1</version>
+			<version>4.13.5</version>
 		</dependency>
 	</dependencies>
 	<properties>

@@ -12,8 +12,8 @@ import fr.cnes.sirius.patrius.math.geometry.euclidean.threed.Vector3D;
 import fr.cnes.sirius.patrius.math.util.FastMath;
 import fr.cnes.sirius.patrius.orbits.PositionAngle;
 import fr.cnes.sirius.patrius.propagation.MassProvider;
-import fr.cnes.sirius.patrius.propagation.events.AnomalyDetector;
-import fr.cnes.sirius.patrius.propagation.events.EventDetector;
+import fr.cnes.sirius.patrius.events.detectors.AnomalyDetector;
+import fr.cnes.sirius.patrius.events.EventDetector;
 import fr.cnes.sirius.patrius.utils.exception.PatriusException;
 
 public class ImpulsiveManeuverSpecificFrame {
