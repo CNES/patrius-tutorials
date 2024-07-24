@@ -61,7 +61,7 @@ public class SolarPointedAttitudeLaw {
         // Building an attitude law
         final Vector3D firstAxis = new Vector3D(1., 0., 0.);
         final Vector3D secondAxis = new Vector3D(0., 1., 0.);
-        final AttitudeLaw attitudeLaw = new SunPointing(sun, firstAxis, secondAxis, sun);
+        final AttitudeLaw attitudeLaw = new SunPointing(firstAxis, secondAxis, sun);
         final Attitude att = attitudeLaw.getAttitude(iniOrbit);
  
         // Printing attitude

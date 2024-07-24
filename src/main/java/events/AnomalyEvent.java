@@ -4,9 +4,9 @@ import java.util.ArrayList;
 
 import fr.cnes.sirius.patrius.math.util.FastMath;
 import fr.cnes.sirius.patrius.orbits.PositionAngle;
-import fr.cnes.sirius.patrius.propagation.events.AbstractDetector;
-import fr.cnes.sirius.patrius.propagation.events.AnomalyDetector;
-import fr.cnes.sirius.patrius.propagation.events.EventDetector.Action;
+import fr.cnes.sirius.patrius.events.AbstractDetector;
+import fr.cnes.sirius.patrius.events.detectors.AnomalyDetector;
+import fr.cnes.sirius.patrius.events.EventDetector.Action;
 import fr.cnes.sirius.patrius.utils.exception.PatriusException;
 
 public class AnomalyEvent {

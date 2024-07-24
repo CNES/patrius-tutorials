@@ -23,6 +23,7 @@ import fr.cnes.sirius.patrius.forces.radiation.KnockeRiesModel;
 import fr.cnes.sirius.patrius.forces.radiation.RediffusedRadiationPressure;
 import fr.cnes.sirius.patrius.forces.gravity.GravityModel;
 import fr.cnes.sirius.patrius.forces.gravity.ThirdBodyAttraction;
+import fr.cnes.sirius.patrius.frames.CelestialBodyFrame;
 import fr.cnes.sirius.patrius.frames.Frame;
 import fr.cnes.sirius.patrius.frames.FramesFactory;
 import fr.cnes.sirius.patrius.math.ode.FirstOrderIntegrator;
@@ -57,7 +58,7 @@ public class NumericalPropagationWithSRP {
  
         // Getting the frame with wich will defined the orbit parameters
         // As for time scale, we will use also a "factory".
-        final Frame GCRF = FramesFactory.getGCRF();
+        final CelestialBodyFrame GCRF = FramesFactory.getGCRF();
  
         // Initial orbit
         final double sma = 7000.e+3;
@@ -99,14 +100,11 @@ public class NumericalPropagationWithSRP {
         final CelestialBody sun = new MeeusSun();
  
         // Definition of the Earth ellipsoid for later SRP computation
-        final Frame ITRF = FramesFactory.getITRF();
+        final CelestialBodyFrame ITRF = FramesFactory.getITRF();
         final double AE = Constants.WGS84_EARTH_EQUATORIAL_RADIUS;
         final EllipsoidBodyShape EARTH = new OneAxisEllipsoid(AE, Constants.WGS84_EARTH_FLATTENING, ITRF, "EARTH");
  
         // Direct SRP data
-        final double dRef = 1.4959787E11;
-        final double pRef = 4.5605E-6;
-        final DirectRadiativeModel rm = new DirectRadiativeModel(assembly);
         final GravityModel radPres = new MeeusSun().getGravityModel();
         final ThirdBodyAttraction sunForceModel = new ThirdBodyAttraction(radPres);
  

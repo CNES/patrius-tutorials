@@ -8,7 +8,8 @@ import fr.cnes.sirius.patrius.attitudes.Attitude;
 import fr.cnes.sirius.patrius.attitudes.AttitudeLaw;
 import fr.cnes.sirius.patrius.attitudes.TwoDirectionAttitudeLaw;
 import fr.cnes.sirius.patrius.attitudes.directions.CelestialBodyPolesAxisDirection;
-import fr.cnes.sirius.patrius.attitudes.directions.ToCelestialBodyCenterDirection;
+import fr.cnes.sirius.patrius.attitudes.directions.GenericTargetDirection;
+import fr.cnes.sirius.patrius.attitudes.directions.IDirection;
 import fr.cnes.sirius.patrius.bodies.CelestialBody;
 import fr.cnes.sirius.patrius.bodies.MeeusSun;
 import fr.cnes.sirius.patrius.frames.Frame;
@@ -61,7 +62,7 @@ public class TwoDirectionAttitudeLaws {
         final CelestialBody sun = new MeeusSun();
  
         // Sun directions
-        final ToCelestialBodyCenterDirection dirSun = new ToCelestialBodyCenterDirection(sun);
+        final IDirection dirSun = new GenericTargetDirection(sun);
         final CelestialBodyPolesAxisDirection dirPole = new CelestialBodyPolesAxisDirection(sun);
  
         // Building an attitude law

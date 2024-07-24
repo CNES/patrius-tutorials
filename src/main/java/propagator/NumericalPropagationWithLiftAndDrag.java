@@ -19,6 +19,7 @@ import fr.cnes.sirius.patrius.forces.ForceModel;
 import fr.cnes.sirius.patrius.forces.atmospheres.Atmosphere;
 import fr.cnes.sirius.patrius.forces.atmospheres.US76;
 import fr.cnes.sirius.patrius.forces.drag.DragForce;
+import fr.cnes.sirius.patrius.frames.CelestialBodyFrame;
 import fr.cnes.sirius.patrius.frames.Frame;
 import fr.cnes.sirius.patrius.frames.FramesFactory;
 import fr.cnes.sirius.patrius.frames.LOFType;
@@ -120,7 +121,7 @@ public class NumericalPropagationWithLiftAndDrag {
         propagator.setAttitudeProvider(attitudeLaw);
  
         // Definition of the Earth ellipsoid for later atmospheric density computation
-        final Frame ITRF = FramesFactory.getITRF();
+        final CelestialBodyFrame ITRF = FramesFactory.getITRF();
         final double AE = Constants.WGS84_EARTH_EQUATORIAL_RADIUS;
         final EllipsoidBodyShape EARTH = new OneAxisEllipsoid(AE, Constants.WGS84_EARTH_FLATTENING, ITRF, "EARTH");
  

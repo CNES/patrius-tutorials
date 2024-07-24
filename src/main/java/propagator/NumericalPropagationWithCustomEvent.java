@@ -15,8 +15,8 @@ import fr.cnes.sirius.patrius.orbits.OrbitType;
 import fr.cnes.sirius.patrius.orbits.PositionAngle;
 import fr.cnes.sirius.patrius.orbits.orbitalparameters.ApsisRadiusParameters;
 import fr.cnes.sirius.patrius.propagation.SpacecraftState;
-import fr.cnes.sirius.patrius.propagation.events.AbstractDetector;
-import fr.cnes.sirius.patrius.propagation.events.EventDetector;
+import fr.cnes.sirius.patrius.events.AbstractDetector;
+import fr.cnes.sirius.patrius.events.EventDetector;
 import fr.cnes.sirius.patrius.propagation.numerical.NumericalPropagator;
 import fr.cnes.sirius.patrius.time.AbsoluteDate;
 import fr.cnes.sirius.patrius.time.TimeScale;
@@ -75,8 +75,7 @@ public class NumericalPropagationWithCustomEvent {
             @Override
 			public double g(final SpacecraftState s) throws PatriusException {
                 // We want to raise the event when Lv = 45 deg
-                final double delta = s.getLv() - FastMath.toRadians(45.);
-                return delta;
+                return s.getLv() - FastMath.toRadians(45.);
             }
  
             @Override
@@ -119,6 +118,13 @@ public class NumericalPropagationWithCustomEvent {
             public EventDetector copy() {
                 return null;
             }
+
+			@Override
+			public boolean filterEvent(SpacecraftState state, boolean increasing, boolean forward)
+					throws PatriusException {
+				// TODO Auto-generated method stub
+				return false;
+			}
  
         };
  
