@@ -1,6 +1,7 @@
 # PATRIUS Tutorials
 
-This project contains a list of tutorials to learn how to use the PATRIUS library. These tutorials are compatible with **Patrius v4.13.5**, currently the latest version available on [Connect by CNES](https://www.connectbycnes.fr/patrius).
+This project contains a list of tutorials to learn how to use the PATRIUS library. These tutorials are compatible with **Patrius v4.14.1**, currently the latest version available on the [Maven Central repositories](https://mvnrepository.com/artifact/fr.cnes.sirius.patrius/patrius).
+
 
 ## ABOUT
 

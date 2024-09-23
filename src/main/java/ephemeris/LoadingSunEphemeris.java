@@ -7,7 +7,7 @@ import fr.cnes.sirius.addons.patriusdataset.PatriusDataset;
 import fr.cnes.sirius.patrius.bodies.CelestialBody;
 import fr.cnes.sirius.patrius.bodies.CelestialBodyFactory;
 import fr.cnes.sirius.patrius.bodies.JPLCelestialBodyLoader;
-import fr.cnes.sirius.patrius.bodies.EphemerisType;
+import fr.cnes.sirius.patrius.bodies.PredefinedEphemerisType;
 import fr.cnes.sirius.patrius.frames.Frame;
 import fr.cnes.sirius.patrius.frames.FramesFactory;
 import fr.cnes.sirius.patrius.orbits.pvcoordinates.PVCoordinates;
@@ -33,7 +33,7 @@ public class LoadingSunEphemeris {
  
         for (int i = 0; i < fileNames.length; i++) {
  
-            final JPLCelestialBodyLoader loader = new JPLCelestialBodyLoader(fileNames[i], EphemerisType.SUN);
+            final JPLCelestialBodyLoader loader = new JPLCelestialBodyLoader(fileNames[i], PredefinedEphemerisType.SUN);
  
             CelestialBodyFactory.clearCelestialBodyLoaders();
             CelestialBodyFactory.addCelestialBodyLoader(CelestialBodyFactory.SUN, loader);
