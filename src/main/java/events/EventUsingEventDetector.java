@@ -19,7 +19,7 @@ public class EventUsingEventDetector implements EventDetector {
  
     /**
      * Constructor
-     * @param date absolute date when event will occured.
+     * @param date absolute date when event will occur.
      */
     public EventUsingEventDetector( final AbsoluteDate date ) {
         this.date = date;
